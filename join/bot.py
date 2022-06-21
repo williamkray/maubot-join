@@ -28,7 +28,7 @@ class Join(Plugin):
         if evt.sender in self.config["admins"]:
             try:
                 await evt.respond(f"trying, give me a minute...")
-                await self.client.join_room(room, max_retries=3)
+                await self.client.join_room(room, max_retries=2)
                 await evt.respond(f"i'm in!")
             except Exception as e:
                 await evt.respond(f"i tried, but couldn't join because \"{e}\"")
