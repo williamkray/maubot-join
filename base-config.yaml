@@ -1,0 +1,5 @@
+# list of users who can convince your bot to join another room
+admins:
+  - '@user1:server.tld'
+  - '@user2:server.tld'
+
