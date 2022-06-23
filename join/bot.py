@@ -24,16 +24,20 @@ class Join(Plugin):
 
     @command.new("join", help="tell me a room to join and i'll do my scientific best")
     @command.argument("room", required=True)
-    async def join_that_room(self, evt: MessageEvent, room: str) -> None:
-        if evt.sender in self.config["admins"]:
-            try:
-                await evt.respond(f"trying, give me a minute...")
-                await self.client.join_room(room, max_retries=2)
-                await evt.respond(f"i'm in!")
-            except Exception as e:
-                await evt.respond(f"i tried, but couldn't join because \"{e}\"")
+    async def join_that_room(self, evt: MessageEvent, room: RoomAlias) -> None:
+        if (room == "help") or len(room) == 0:
+            await evt.reply('pass me a room alias (like #someroom:example.com) and i will try to join it')
         else:
-            await evt.reply("you're not the boss of me!")
+            if evt.sender in self.config["admins"]:
+                try:
+                    mymsg = await evt.respond(f"trying, give me a minute...")
+                    self.log.info(mymsg)
+                    await self.client.join_room(room, max_retries=2)
+                    await evt.respond(f"i'm in!", edits=mymsg)
+                except Exception as e:
+                    await evt.respond(f"i tried, but couldn't join because \"{e}\"", edits=mymsg)
+            else:
+                await evt.reply("you're not the boss of me!")
 
     @classmethod
     def get_config_class(cls) -> Type[BaseProxyConfig]:
