@@ -15,4 +15,4 @@ automatically. use the `!join #someroom:example.com` command and your bot will g
 if the room in question has restricted access (invite-only, space-membership is required, etc) you should try to meet
 that criteria first, otherwise the bot will return the error.
 
-also now including a `!part` command that will get your bot to leave a room by ID! amazing!
+also now including a `!part` command that will get your bot to leave a room by alias or ID! amazing!

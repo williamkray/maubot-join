@@ -44,9 +44,15 @@ class Join(Plugin):
     @command.argument("room", required=True)
     async def join_that_room(self, evt: MessageEvent, room: RoomAlias) -> None:
         if (room == "help") or len(room) == 0:
-            await evt.reply('pass me a room id (like !someRoomId:server.tld) and i will try to leave it')
+            await evt.reply('pass me a room id or alias (like !someRoomId:server.tld or #someroomalias:example.com)\
+                            and i will try to leave it')
         else:
             if evt.sender in self.config["admins"]:
+                if room.startswith('#'):
+                    resolved = await self.client.resolve_room_alias(room)
+                    room = resolved['room_id']
+                    self.log.debug(f"DEBUG: {room}")
+
                 try:
                     mymsg = await evt.respond(f"trying, give me a minute...")
                     self.log.info(mymsg)
