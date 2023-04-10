@@ -42,7 +42,7 @@ class Join(Plugin):
 
     @command.new("part", help="tell me a room to leave and i'll do my scientific best")
     @command.argument("room", required=True)
-    async def join_that_room(self, evt: MessageEvent, room: RoomAlias) -> None:
+    async def part_that_room(self, evt: MessageEvent, room: RoomAlias) -> None:
         if (room == "help") or len(room) == 0:
             await evt.reply('pass me a room id or alias (like !someRoomId:server.tld or #someroomalias:example.com)\
                             and i will try to leave it')
