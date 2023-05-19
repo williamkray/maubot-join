@@ -1,9 +1,9 @@
 from typing import Type
 
+from maubot import MessageEvent, Plugin
+from maubot.handlers import command
 from mautrix.types import RoomAlias
 from mautrix.util.config import BaseProxyConfig, ConfigUpdateHelper
-from maubot import Plugin, MessageEvent
-from maubot.handlers import command
 
 
 class Config(BaseProxyConfig):
