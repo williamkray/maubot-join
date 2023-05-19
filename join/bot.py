@@ -27,10 +27,10 @@ class Join(Plugin):
         else:
             if evt.sender in self.config["admins"]:
                 try:
-                    mymsg = await evt.respond(f"trying, give me a minute...")
+                    mymsg = await evt.respond("trying, give me a minute...")
                     self.log.info(mymsg)
                     await self.client.join_room(room, max_retries=2)
-                    await evt.respond(f"i'm in!", edits=mymsg)
+                    await evt.respond("i'm in!", edits=mymsg)
                 except Exception as e:
                     await evt.respond(
                         f'i tried, but couldn\'t join because "{e}"', edits=mymsg
@@ -54,10 +54,10 @@ class Join(Plugin):
                     self.log.debug(f"DEBUG: {room}")
 
                 try:
-                    mymsg = await evt.respond(f"trying, give me a minute...")
+                    mymsg = await evt.respond("trying, give me a minute...")
                     self.log.info(mymsg)
                     await self.client.leave_room(room)
-                    await evt.respond(f"i'm out!", edits=mymsg)
+                    await evt.respond("i'm out!", edits=mymsg)
                 except Exception as e:
                     await evt.respond(
                         f'i tried, but couldn\'t leave because "{e}"', edits=mymsg
