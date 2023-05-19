@@ -21,8 +21,10 @@ class Join(Plugin):
     async def join_that_room(self, evt: MessageEvent, room: RoomAlias) -> None:
         if (room == "help") or len(room) == 0:
             await evt.reply(
-                "pass me a room alias or id (like #someroom:example.com or !someRoomId:example.com) \
-                            and i will try to join it"
+                (
+                    "pass me a room alias or id (like #someroom:example.com or "
+                    "!someRoomId:example.com) and i will try to join it"
+                )
             )
         else:
             if evt.sender in self.config["admins"]:
@@ -43,8 +45,10 @@ class Join(Plugin):
     async def part_that_room(self, evt: MessageEvent, room: RoomAlias) -> None:
         if (room == "help") or len(room) == 0:
             await evt.reply(
-                "pass me a room id or alias (like !someRoomId:server.tld or #someroomalias:example.com)\
-                            and i will try to leave it"
+                (
+                    "pass me a room id or alias (like !someRoomId:server.tld or "
+                    "#someroomalias:example.com) and i will try to leave it"
+                )
             )
         else:
             if evt.sender in self.config["admins"]:
