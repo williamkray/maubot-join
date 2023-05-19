@@ -1,23 +1,9 @@
-from typing import Awaitable, Type, Optional, Tuple
-import json
-import time
+from typing import Type
 
-from mautrix.client import Client
-from mautrix.types import (
-    Event,
-    StateEvent,
-    EventID,
-    UserID,
-    FileInfo,
-    EventType,
-    RoomID,
-    RoomAlias,
-    ReactionEvent,
-    RedactionEvent,
-)
+from mautrix.types import RoomAlias
 from mautrix.util.config import BaseProxyConfig, ConfigUpdateHelper
 from maubot import Plugin, MessageEvent
-from maubot.handlers import command, event
+from maubot.handlers import command
 
 
 class Config(BaseProxyConfig):
