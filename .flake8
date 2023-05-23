@@ -1,0 +1,11 @@
+[flake8]
+doctests = true
+exclude =
+  .eggs
+  .tox
+  .venv
+  .cache
+select = B,C,E,F,W,T4,B9
+ignore =
+  # line too long
+  E501,

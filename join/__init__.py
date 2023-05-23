@@ -1,1 +1,1 @@
-from .bot import Join
+from .bot import Join  # noqa: F401
