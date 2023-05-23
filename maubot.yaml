@@ -1,6 +1,6 @@
 maubot: 0.1.0
 id: org.jobmachine.join
-version: 0.2.2
+version: 0.2.3
 modules:
   - join
 main_class: Join
