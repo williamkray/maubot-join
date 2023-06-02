@@ -1,8 +1,8 @@
 from typing import Type
 
 from maubot import MessageEvent, Plugin
-from maubot.handlers import command
-from mautrix.types import RoomAlias
+from maubot.handlers import command, event
+from mautrix.types import RoomAlias, EventType, StateEvent, Membership
 from mautrix.util.config import BaseProxyConfig, ConfigUpdateHelper
 
 
@@ -15,6 +15,16 @@ class Join(Plugin):
     async def start(self) -> None:
         await super().start()
         self.config.load_and_update()
+
+    @event.on(EventType.ROOM_MEMBER)
+    async def handle_invite(self, evt: StateEvent) -> None:
+        # i'm allergic to and statements
+        if evt.state_key == self.client.mxid:
+            if evt.content.membership == Membership.INVITE:
+                if evt.sender in self.config["admins"]:
+                    await self.client.join_room(evt.room_id)
+                else:
+                    await self.client.leave_room(evt.room_id)
 
     @command.new("join", help="tell me a room to join and i'll do my scientific best")
     @command.argument("room", required=True)
