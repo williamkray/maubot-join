@@ -45,7 +45,7 @@ class Join(Plugin):
                     await evt.respond("i'm in!", edits=mymsg)
                 except Exception as e:
                     await evt.respond(
-                        f'i tried, but couldn\'t join because "{e}"', edits=mymsg
+                        f"i tried, but couldn't join because: {e}", edits=mymsg
                     )
             else:
                 await evt.reply("you're not the boss of me!")
@@ -74,7 +74,7 @@ class Join(Plugin):
                     await evt.respond("i'm out!", edits=mymsg)
                 except Exception as e:
                     await evt.respond(
-                        f'i tried, but couldn\'t leave because "{e}"', edits=mymsg
+                        f"i tried, but couldn't leave because: {e}", edits=mymsg
                     )
             else:
                 await evt.reply("you're not the boss of me!")
