@@ -2,7 +2,7 @@ from typing import Type
 
 from maubot import MessageEvent, Plugin
 from maubot.handlers import command, event
-from mautrix.types import RoomAlias, EventType, StateEvent, Membership
+from mautrix.types import EventType, Membership, RoomAlias, StateEvent
 from mautrix.util.config import BaseProxyConfig, ConfigUpdateHelper
 
 
