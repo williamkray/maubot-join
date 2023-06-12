@@ -1,0 +1,12 @@
+.eggs/
+*.egg-info/
+*.egg
+*.py[cod]
+__pycache__/
+*.so
+*~
+
+.cache
+.venv
+.tox
+

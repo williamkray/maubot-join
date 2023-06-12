@@ -2,7 +2,7 @@ from typing import Type
 
 from maubot import MessageEvent, Plugin
 from maubot.handlers import command, event
-from mautrix.types import RoomAlias, EventType, StateEvent, Membership
+from mautrix.types import EventType, Membership, RoomAlias, StateEvent
 from mautrix.util.config import BaseProxyConfig, ConfigUpdateHelper
 
 
@@ -45,7 +45,7 @@ class Join(Plugin):
                     await evt.respond("i'm in!", edits=mymsg)
                 except Exception as e:
                     await evt.respond(
-                        f'i tried, but couldn\'t join because "{e}"', edits=mymsg
+                        f"i tried, but couldn't join because: {e}", edits=mymsg
                     )
             else:
                 await evt.reply("you're not the boss of me!")
@@ -74,7 +74,7 @@ class Join(Plugin):
                     await evt.respond("i'm out!", edits=mymsg)
                 except Exception as e:
                     await evt.respond(
-                        f'i tried, but couldn\'t leave because "{e}"', edits=mymsg
+                        f"i tried, but couldn't leave because: {e}", edits=mymsg
                     )
             else:
                 await evt.reply("you're not the boss of me!")
