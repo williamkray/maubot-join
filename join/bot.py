@@ -9,9 +9,13 @@ from mautrix.util.config import BaseProxyConfig, ConfigUpdateHelper
 class Config(BaseProxyConfig):
     def do_update(self, helper: ConfigUpdateHelper) -> None:
         helper.copy("admins")
+        helper.copy("servers")
 
 
 class Join(Plugin):
+    def is_user_trustworthy(sender):
+        return sender in self.config["admins"] or sender.split(":", 1)[1] in self.config["servers"]
+
     async def start(self) -> None:
         await super().start()
         self.config.load_and_update()
@@ -21,7 +25,7 @@ class Join(Plugin):
         # i'm allergic to and statements
         if evt.state_key == self.client.mxid:
             if evt.content.membership == Membership.INVITE:
-                if evt.sender in self.config["admins"]:
+                if self.is_user_trustworthy(evt.sender):
                     await self.client.join_room(evt.room_id)
                 else:
                     await self.client.leave_room(evt.room_id)
@@ -37,7 +41,7 @@ class Join(Plugin):
                 )
             )
         else:
-            if evt.sender in self.config["admins"]:
+            if self.is_user_trustworthy(evt.sender):
                 try:
                     mymsg = await evt.respond("trying, give me a minute...")
                     self.log.info(mymsg)
@@ -61,7 +65,7 @@ class Join(Plugin):
                 )
             )
         else:
-            if evt.sender in self.config["admins"]:
+            if self.is_user_trustworthy(evt.sender):
                 if room.startswith("#"):
                     resolved = await self.client.resolve_room_alias(room)
                     room = resolved["room_id"]

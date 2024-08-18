@@ -2,4 +2,6 @@
 admins:
   - '@user1:server.tld'
   - '@user2:server.tld'
-
+# list of homeservers of which all users can invite
+servers:
+  - 'server.tld'
