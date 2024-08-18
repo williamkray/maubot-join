@@ -13,8 +13,11 @@ class Config(BaseProxyConfig):
 
 
 class Join(Plugin):
-    def is_user_trustworthy(sender):
-        return sender in self.config["admins"] or sender.split(":", 1)[1] in self.config["servers"]
+    def is_user_trustworthy(self, sender):
+        return (
+            sender in self.config["admins"]
+            or sender.split(":", 1)[1] in self.config["servers"]
+        )
 
     async def start(self) -> None:
         await super().start()
@@ -65,6 +68,10 @@ class Join(Plugin):
                 )
             )
         else:
+            self.log.debug(f"DEBUG sender is: {evt.sender}")
+            self.log.debug(
+                f"DEBUG trustworthy is: {self.is_user_trustworthy(evt.sender)}"
+            )
             if self.is_user_trustworthy(evt.sender):
                 if room.startswith("#"):
                     resolved = await self.client.resolve_room_alias(room)
