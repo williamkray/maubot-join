@@ -1,4 +1,5 @@
 # join bot
+[![Chat on Matrix](https://img.shields.io/badge/chat_on_matrix-%23dev:mssj.me-green)](https://matrix.to/#/#dev:mssj.me)
 
 a really stupid simple maubot module that allows for only a designated list of users to get your maubot instance to join
 another room.
