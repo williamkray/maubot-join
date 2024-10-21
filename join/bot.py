@@ -78,6 +78,17 @@ class Join(Plugin):
                     room = resolved["room_id"]
                     self.log.debug(f"DEBUG: {room}")
 
+                    if room == evt.room_id:
+                        await evt.reply(
+                            (
+                                "looks like you're asking me to leave THIS room. run that command from somewhere "
+                                "else so i don't get stuck in a perpetual join-then-leave-again loop if you invite "
+                                "me back (i might try to process old requests after joining), or just kick me out "
+                                "normally if you have the power!"
+                            )
+                        )
+                        return
+
                 try:
                     mymsg = await evt.respond("trying, give me a minute...")
                     self.log.info(mymsg)
