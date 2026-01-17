@@ -3,7 +3,10 @@ from typing import Type
 from maubot import MessageEvent, Plugin
 from maubot.handlers import command, event
 from mautrix.types import EventType, Membership, RoomAlias, StateEvent
-from mautrix.types.event.state import CanonicalAliasStateEventContent, RoomNameStateEventContent
+from mautrix.types.event.state import (
+    CanonicalAliasStateEventContent,
+    RoomNameStateEventContent,
+)
 from mautrix.util.config import BaseProxyConfig, ConfigUpdateHelper
 
 
@@ -40,7 +43,7 @@ class Join(Plugin):
         if room == "list":
             await self.join_list(evt)
             return
-        
+
         if not room or room == "help":
             await evt.reply(
                 (
@@ -50,7 +53,7 @@ class Join(Plugin):
                 )
             )
             return
-        
+
         if self.is_user_trustworthy(evt.sender):
             try:
                 mymsg = await evt.respond("trying, give me a minute...")
@@ -68,11 +71,9 @@ class Join(Plugin):
     @command.argument("room", required=True)
     async def part_that_room(self, evt: MessageEvent, room: RoomAlias) -> None:
         if room == "list":
-            await evt.reply(
-                "use !join list to see all rooms i'm in"
-            )
+            await evt.reply("use !join list to see all rooms i'm in")
             return
-        
+
         if (room == "help") or len(room) == 0:
             await evt.reply(
                 (
@@ -131,7 +132,7 @@ class Join(Plugin):
             room_list = []
             for room_id in joined_rooms:
                 room_info = f"`{room_id}`"
-                
+
                 # Try to get room name
                 try:
                     name_content = await self.client.get_state_event(
